@@ -1,12 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What's Playing Where?</title>
-</head>
-<body>
-  <script src="./asstets/js/script.js"></script>
-</body>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/dist/output.css" rel="stylesheet">
+        <link rel="stylesheet" href="tailwind.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body class="relative bg-black w-full h-screen p-10">
+        <!-- header -->
+        <header>
+            <h1 class="font-montserrat text-3xl font-bold text-center text-white">
+                Header
+            </h1>
+        </header>
+
+        <!-- main -->
+        <section> 
+            <div class="w-11/12 mx-auto mt-20 py-20 px-20 bg-modal text-white">
+                <div class="flex gap-10 justify-between">
+                    <button class="border-2 border-white rounded-lg px-4 focus:outline-none">  
+                        <i class="fa-solid fa-film text-3xl text-white mt-1"></i>
+                    </button>
+                    <div class="w-full relative">
+                        <input type="text" class="input h-14 bg-transparent rounded-lg border-2 pl-3 w-full font-montserrat text-white font-medium focus:outline-none" placeholder="Search">
+                        <p class="hidden spantext block ml-4 mt-1 absolute text-red-500 uppercase text-lg font-semibold block">Please write something</p>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-20">
+                    <button class="searchbutton h-14 w-1/2 border-2 border-white px-6 rounded-lg font-montserrat text-xl font-semibold text-center text-white focus:outline-none">Button</button>
+                </div>
+            </div>
+        </section>
+        <!-- searching -->
+        <section> 
+            <div class="hidden searchbox w-11/12 mx-auto mt-24 py-10 px-20 bg-modal text-white">
+                <h1 class="text-center font-montserrat text-3xl text-white font-medium uppercase">search result</h1>
+                <div class="grid grid-cols-2 mt-10 gap-20">
+                    <div class="space-y-8">
+                        <div class="flex justify-center gap-4">
+                            <h1 class="font-montserrat text-3xl text-white font-medium uppercase">Title :</h1>
+                            <p></p>
+                        </div>
+                        <div class="flex justify-center gap-4">
+                            <h1 class="font-montserrat text-3xl text-white font-medium uppercase">Title :</h1>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="flex justify-center gap-4">
+                            <h1 class="font-montserrat text-3xl text-white font-medium uppercase">Title :</h1>
+                            <p></p>
+                        </div>
+                        <div class="flex justify-center gap-4">
+                            <h1 class="font-montserrat text-3xl text-white font-medium uppercase">Title :</h1>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!--  -->
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <footer class=" mt-32 pb-5">
+            <h1 class="font-montserrat text-3xl font-bold text-center text-white">
+                Footer
+            </h1>
+        </footer>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="Javascript.js"></script>
 </html>
+
+<!-- npx tailwindcss -i tailwind.css -o ./Layouts/style/tailwind.css --watch -->
