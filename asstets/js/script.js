@@ -1,35 +1,42 @@
-// http://api.fandango.com/<version>?op=<operation>&<parameter list>&apikey=<apikey>&sig=<sig>
-// const fandangoAPIkey = 'y8xzwnm8dc9mh2dynbjx43d3';
-// const FandangoSecretKey = 'c3U5keUBDh';
+// const baseEndpoint = 'https://api-gate2.movieglu.com/';
+// const apiVersion = 'v200'
+// const authorization = 'Basic UkhUTjpYQk5RaDBDNGhPamM=';
+// const client = 'RHTN';
+// const apikey = 'qnpVdOgChm42R0SlChf4OgIAJS6b5ZN2QHGKUFv4';
+// const datetime = new Date(Date.now()).toISOString();
+// const territory = 'US';
 
-// async function generateAPISig() {
-// const unixTimestamp = Date.now ();
-// const unhashedSig = fandangoAPIkey + FandangoSecretKey + unixTimestamp;
+const moviegluCall = {
+  baseEndpoint: 'https://api-gate2.movieglu.com/',
+  apiVersion: 'v200',
+  authorization: 'Basic UkhUTjpYQk5RaDBDNGhPamM=',
+  client: 'RHTN',
+  apikey: 'qnpVdOgChm42R0SlChf4OgIAJS6b5ZN2QHGKUFv4',
+  datetime: new Date(Date.now()).toISOString(),
+  territory: 'US'
+}
 
-// var textAsBuffer = new TextEncoder().encode(unhashedSig);
-// var hashBuffer = await window.crypto.subtle.digest('SHA-256', textAsBuffer);
-// var hashArray = Array.from(new Uint8Array(hashBuffer))
-// var hashedSig = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-// return hashedSig;
-// }
-
-// function fandangoAPICall() {
-//   const hashedSig = generateAPISig();
-//   const apiURL = `http://api.fandango.com/v1/?op=theatersbypostalcodesearch&postalcode=94105&apikey=${fandangoAPIkey}&sig=${hashedSig}`;
-
-//   fetch(apiURL)
-//     .then(function (response) {
-//     return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data)      
-//     });
-//   }
-
-//   fandangoAPICall()
-
-const baseEndpoint = 'https://api-gate2.movieglu.com/';
+const moviegluSandbox = {
+  baseEndpoint: 'https://api-gate2.movieglu.com/',
+  apiVersion: 'v200',
+  authorization: 'Basic UkhUTl9YWDpPWDVQeDNKS0NVY1Q=',
+  client: 'RHTN',
+  apikey: 'Fvn2jSwMsT4NBd1JVtz9u9lnwhsnaZQs2wP8Nmq8',
+  datetime: new Date(Date.now()).toISOString(),
+  territory: 'XX'
+}
 
 async function fetchMovieGluData(query) {
-  const response = await fetch(`${baseEndpoint}?q=${query}`)
+  const response = await fetch(`${moviegluSandbox.baseEndpoint}?q=${query}`, {
+    "headers": {
+        "api-version": moviegluSandbox.apiVersion,
+        "Authorization": moviegluSandbox.authorization,
+        "client": moviegluSandbox.client,
+        "x-api-key": moviegluSandbox.apikey,
+        "device-datetime": moviegluSandbox.datetime,
+        "territory": moviegluSandbox.territory,
+    },
+});
+  const data = await response.json();
+  return data;
 }
