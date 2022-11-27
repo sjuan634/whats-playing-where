@@ -1,6 +1,12 @@
-const API_KEY = 'RlJFRV8xNDpZM3ZobE9NWld6SlI=';
-const CLIENT_NAME = 'FREE_14';
-const X_API_KEY = 'jrR2cJWL7w27dyw9vBa714ToFh18nDpGaQVn89bA';
+// const API_KEY = 'RlJFRV8xNDpZM3ZobE9NWld6SlI=';
+// const CLIENT_NAME = 'FREE_14';
+// const X_API_KEY = 'jrR2cJWL7w27dyw9vBa714ToFh18nDpGaQVn89bA';
+// const API_VERSION = 'v200';
+// const TERRITORY = 'US';
+
+const API_KEY = 'UkhUTjpYQk5RaDBDNGhPamM=';
+const CLIENT_NAME = 'RHTN';
+const X_API_KEY = 'qnpVdOgChm42R0SlChf4OgIAJS6b5ZN2QHGKUFv4';
 const API_VERSION = 'v200';
 const TERRITORY = 'US';
 
@@ -168,15 +174,28 @@ function grabLocationHandler(e) {
   secondScreenDiv.classList.remove('d-none');
   firstScreenDiv.classList.add('d-none');
 
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position){
-      curLocation.lat = position.coords.latitude;
-      curLocation.lng = position.coords.longitude;
-      renderNearbyTheatersHandler();
-    }, function(err){
-      renderNearbyTheatersHandler();
-    });
-  } 
+  var zipCode = document.querySelector('.zip-code-inp').value;
+  var geocodeApiKey = 'AIzaSyAEbZW4uFqVbf4qom4lu0Hgj6BZ71Cm1dE';
+  var apiURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${geocodeApiKey}`;
+  fetch(apiURL)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    curLocation.lat = data.results[0].geometry.location.lat;
+    curLocation.lng = data.results[0].geometry.location.lng;
+    renderNearbyTheatersHandler();
+  })
+
+  // if(navigator.geolocation) {
+  //   navigator.geolocation.getCurrentPosition(function(position){
+  //     curLocation.lat = position.coords.latitude;
+  //     curLocation.lng = position.coords.longitude;
+  //     renderNearbyTheatersHandler();
+  //   }, function(err){
+  //     renderNearbyTheatersHandler();
+  //   });
+  // } 
 }
 
 function goBackHandler() {
