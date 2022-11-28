@@ -197,7 +197,7 @@ goBackBtns.forEach(function(goBackBtn){
   goBackBtn.addEventListener('click', goBackHandler);
 });
 
-function handleClick (e) {
+function getLocationHandler (e) {
   secondScreenDiv.classList.remove('d-none');
   firstScreenDiv.classList.add('d-none');
   zipCodesDiv.classList.add('d-none');
@@ -226,7 +226,7 @@ function renderSearchedZipCodes() {
     li.setAttribute('data-q', item);
     li.innerText = item;
     searchedZipCodesList.prepend(li);
-    li.addEventListener('click', handleClick);
+    li.addEventListener('click', getLocationHandler);
   });
 }
 
