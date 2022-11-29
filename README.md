@@ -33,4 +33,5 @@ This is an application for movie-goers who want to know what's playing at movie 
 ## Images of Deployed Application
 ![web image 1](https://i.imgur.com/SN6jINJ.jpg)
 ![web image 2](https://i.imgur.com/qKPRfmE.jpg)
-![web image 2](https://i.imgur.com/76yCZBv.jpg)
+![web image 3](https://i.imgur.com/76yCZBv.jpg)
+![web image 4](https://i.imgur.com/BpL3HGy.jpg)
