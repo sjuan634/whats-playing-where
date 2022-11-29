@@ -1,6 +1,7 @@
-const API_KEY = 'RlJFRV8xNDpZM3ZobE9NWld6SlI=';
-const CLIENT_NAME = 'FREE_14';
-const X_API_KEY = 'jrR2cJWL7w27dyw9vBa714ToFh18nDpGaQVn89bA';
+
+const API_KEY = 'VktRTTp3RnVRNGh4YWJrdXo=';
+const CLIENT_NAME = 'VKQM';
+const X_API_KEY = '11ilJjMMlb9OPLKXRmRbS8i8DfPJOSEI9o7ayQrC';
 const API_VERSION = 'v200';
 const TERRITORY = 'US';
 
@@ -13,6 +14,8 @@ const showsTbody = document.querySelector('.shows-tbody');
 const forthScreenDiv = document.querySelector('.forth-screen');
 const theaterMapDiv = document.querySelector('.theater-map');
 const goBackBtns = document.querySelectorAll('.go-back-btn');
+const searchedZipCodesList = document.querySelector('.searched-zipcodes-list');
+const zipCodesDiv = document.querySelector('.zipcodes-container');
 
 let curLocation = { lat: 	40.730610, lng: -73.935242 };
 
@@ -167,16 +170,21 @@ function grabLocationHandler(e) {
 
   secondScreenDiv.classList.remove('d-none');
   firstScreenDiv.classList.add('d-none');
+  zipCodesDiv.classList.add('d-none');
 
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position){
-      curLocation.lat = position.coords.latitude;
-      curLocation.lng = position.coords.longitude;
-      renderNearbyTheatersHandler();
-    }, function(err){
-      renderNearbyTheatersHandler();
-    });
-  } 
+  var zipCode = document.querySelector('.zip-code-inp').value;
+  saveSearchedZipCode(zipCode);
+  var geocodeApiKey = 'AIzaSyAEbZW4uFqVbf4qom4lu0Hgj6BZ71Cm1dE';
+  var apiURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${geocodeApiKey}`;
+  fetch(apiURL)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    curLocation.lat = data.results[0].geometry.location.lat;
+    curLocation.lng = data.results[0].geometry.location.lng;
+    renderNearbyTheatersHandler();
+  }) 
 }
 
 function goBackHandler() {
@@ -189,3 +197,46 @@ grabLocationForm.addEventListener('submit', grabLocationHandler);
 goBackBtns.forEach(function(goBackBtn){
   goBackBtn.addEventListener('click', goBackHandler);
 });
+
+function getLocationHandler (e) {
+  secondScreenDiv.classList.remove('d-none');
+  firstScreenDiv.classList.add('d-none');
+  zipCodesDiv.classList.add('d-none');
+
+  var zipCode = e.target.dataset.q;
+  var geocodeApiKey = 'AIzaSyAEbZW4uFqVbf4qom4lu0Hgj6BZ71Cm1dE';
+  var apiURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${geocodeApiKey}`;
+  fetch(apiURL)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    curLocation.lat = data.results[0].geometry.location.lat;
+    curLocation.lng = data.results[0].geometry.location.lng;
+    renderNearbyTheatersHandler();
+  })
+}
+
+function renderSearchedZipCodes() {
+  const searchedZipCodesLs = JSON.parse(localStorage.getItem('searched-zipcodes')) || [];
+  searchedZipCodesList.innerHTML = '';
+
+  searchedZipCodesLs.forEach(function(item){
+    const li = document.createElement('li');
+    li.className = 'searched-zipcodes-item';
+    li.setAttribute('data-q', item);
+    li.innerText = item;
+    searchedZipCodesList.prepend(li);
+    li.addEventListener('click', getLocationHandler);
+  });
+}
+
+function saveSearchedZipCode(zipCode) {
+  const searchedZipCodesLs = JSON.parse(localStorage.getItem('searched-zipcodes')) || [];
+  if(searchedZipCodesLs.findIndex(el => el == zipCode) != -1) return;
+  searchedZipCodesLs.push(zipCode);
+  localStorage.setItem('searched-zipcodes', JSON.stringify(searchedZipCodesLs));
+  renderSearchedZipCodes();
+}
+
+renderSearchedZipCodes();
