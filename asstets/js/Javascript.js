@@ -1,9 +1,9 @@
 
-const API_KEY = 'VktRTTp3RnVRNGh4YWJrdXo=';
-const CLIENT_NAME = 'VKQM';
-const X_API_KEY = '11ilJjMMlb9OPLKXRmRbS8i8DfPJOSEI9o7ayQrC';
+const API_KEY = 'UkhUTl9YWDpPWDVQeDNKS0NVY1Q=';
+const CLIENT_NAME = 'RHTN';
+const X_API_KEY = 'Fvn2jSwMsT4NBd1JVtz9u9lnwhsnaZQs2wP8Nmq8';
 const API_VERSION = 'v200';
-const TERRITORY = 'US';
+const TERRITORY = 'XX';
 
 const firstScreenDiv = document.querySelector('.first-screen');
 const grabLocationForm = document.querySelector('.grab-location-form');
@@ -30,7 +30,8 @@ function getNearbyTheaters() {
         "x-api-key": X_API_KEY,
         "device-datetime": new Date().toISOString(),
         "territory": TERRITORY,
-        "geolocation": `${curLocation.lat};${curLocation.lng}`
+        // "geolocation": `${curLocation.lat};${curLocation.lng}`
+        "geolocation": '-22.0;14.0'
       }
     })
     .then(function(res){
@@ -58,7 +59,8 @@ function getTheaterShowTimes(theaterId, date) {
         "x-api-key": X_API_KEY,
         "device-datetime": new Date().toISOString(),
         "territory": TERRITORY,
-        "geolocation": `${curLocation.lat};${curLocation.lng}`
+        // "geolocation": `${curLocation.lat};${curLocation.lng}`
+        "geolocation": '-22.0;14.0'
       }
     })
     .then(function(res){
@@ -81,6 +83,7 @@ function showTheaterMap(e) {
   const theaterLat = Number(e.target.querySelector('.theater-lat-inp').value);
   const theaterLng = Number(e.target.querySelector('.theater-lng-inp').value);
 
+  firstScreenDiv.classList.add('d-none');
   secondScreenDiv.classList.add('d-none');
   forthScreenDiv.classList.remove('d-none');
 
@@ -100,6 +103,7 @@ async function renderTheaterShows(e) {
 
   const theaterId = e.target.querySelector('.theater-id-inp').value;
   const date = e.target.querySelector('.theater-shows-date-inp').value;
+  firstScreenDiv.classList.add('d-none');
   secondScreenDiv.classList.add('d-none');
   thirdScreenDiv.classList.remove('d-none');
   showsTbody.innerHTML = '';
@@ -169,7 +173,6 @@ function grabLocationHandler(e) {
   e.preventDefault();
 
   secondScreenDiv.classList.remove('d-none');
-  firstScreenDiv.classList.add('d-none');
   zipCodesDiv.classList.add('d-none');
 
   var zipCode = document.querySelector('.zip-code-inp').value;
@@ -191,6 +194,7 @@ function goBackHandler() {
   thirdScreenDiv.classList.add('d-none');
   forthScreenDiv.classList.add('d-none');
   secondScreenDiv.classList.remove('d-none');
+  firstScreenDiv.classList.remove('d-none');
 }
 
 grabLocationForm.addEventListener('submit', grabLocationHandler); 
@@ -200,7 +204,6 @@ goBackBtns.forEach(function(goBackBtn){
 
 function getLocationHandler (e) {
   secondScreenDiv.classList.remove('d-none');
-  firstScreenDiv.classList.add('d-none');
   zipCodesDiv.classList.add('d-none');
 
   var zipCode = e.target.dataset.q;
