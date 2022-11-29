@@ -1,4 +1,4 @@
-
+// MovieGlu API credentials
 const API_KEY = 'UkhUTl9YWDpPWDVQeDNKS0NVY1Q=';
 const CLIENT_NAME = 'RHTN';
 const X_API_KEY = 'Fvn2jSwMsT4NBd1JVtz9u9lnwhsnaZQs2wP8Nmq8';
@@ -16,9 +16,10 @@ const theaterMapDiv = document.querySelector('.theater-map');
 const goBackBtns = document.querySelectorAll('.go-back-btn');
 const searchedZipCodesList = document.querySelector('.searched-zipcodes-list');
 const zipCodesDiv = document.querySelector('.zipcodes-container');
-
+// default coords
 let curLocation = { lat: 	40.730610, lng: -73.935242 };
 
+// gets cinemasNearby from MovieGlu API
 function getNearbyTheaters() {
   return new Promise(function(resolve, reject){
     fetch('https://api-gate2.movieglu.com/cinemasNearby/?n=10', {
@@ -48,6 +49,7 @@ function getNearbyTheaters() {
   });  
 }
 
+// gets cinemaShowtimes from MovieGlu API
 function getTheaterShowTimes(theaterId, date) {
   return new Promise(function(resolve, reject){
     fetch(`https://api-gate2.movieglu.com/cinemaShowTimes/?cinema_id=${theaterId}&date=${date}`, {
@@ -77,6 +79,7 @@ function getTheaterShowTimes(theaterId, date) {
   });  
 }
 
+// shows pin on Google Map for cinema
 function showTheaterMap(e) {
   e.preventDefault();
 
@@ -98,6 +101,7 @@ function showTheaterMap(e) {
   });
 }
 
+// dynamically creates HTML to display cinemaShowtimes
 async function renderTheaterShows(e) {
   e.preventDefault();
 
@@ -126,6 +130,7 @@ async function renderTheaterShows(e) {
   }
 }
 
+// dynamically creates HTML to display cinemaNearby
 async function renderNearbyTheatersHandler() {
   nearbyTheatersTbody.innerHTML = '';
 
@@ -169,6 +174,7 @@ async function renderNearbyTheatersHandler() {
   }
 }
 
+// converts user input to coords
 function grabLocationHandler(e) {
   e.preventDefault();
 
@@ -190,6 +196,7 @@ function grabLocationHandler(e) {
   }) 
 }
 
+// handles the click on "Go Back" buttons
 function goBackHandler() {
   thirdScreenDiv.classList.add('d-none');
   forthScreenDiv.classList.add('d-none');
@@ -197,11 +204,15 @@ function goBackHandler() {
   firstScreenDiv.classList.remove('d-none');
 }
 
-grabLocationForm.addEventListener('submit', grabLocationHandler); 
+// submit eventListener for the .grab-location-form
+grabLocationForm.addEventListener('submit', grabLocationHandler);
+
+// click eventListener for "Go Back" buttons
 goBackBtns.forEach(function(goBackBtn){
   goBackBtn.addEventListener('click', goBackHandler);
 });
 
+// convert the value of the element clicked into coords
 function getLocationHandler (e) {
   secondScreenDiv.classList.remove('d-none');
   zipCodesDiv.classList.add('d-none');
@@ -220,6 +231,7 @@ function getLocationHandler (e) {
   })
 }
 
+// gets key values from localStorage
 function renderSearchedZipCodes() {
   const searchedZipCodesLs = JSON.parse(localStorage.getItem('searched-zipcodes')) || [];
   searchedZipCodesList.innerHTML = '';
@@ -234,6 +246,7 @@ function renderSearchedZipCodes() {
   });
 }
 
+// saves user input to localStorage
 function saveSearchedZipCode(zipCode) {
   const searchedZipCodesLs = JSON.parse(localStorage.getItem('searched-zipcodes')) || [];
   if(searchedZipCodesLs.findIndex(el => el == zipCode) != -1) return;
