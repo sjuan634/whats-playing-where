@@ -31,20 +31,20 @@
                     <div class="first-screen grab-location-wrapper">
                       <form action="" class="grab-location-form">
                         <legend class="grab-location-heading text-2xl font-montserrat ">Enter ZIP code to see nearby theaters</legend>
-                        <input type="text" class=" input  bg-transparent border-2 rounded-lg h-14  zip-code-inp text-dark" placeholder="Enter your Zip Code">
+                        <input type="text" class=" input  bg-transparent border-2 rounded-lg h-14  zip-code-inp text-dark px-2" placeholder="Enter your Zip Code">
                         <button type="submit" class=" h-14 rounded-lg font-montserrat w-1/2  text-xl grab-location-allow-btn">Submit</button>
                       </form>
                     </div>
                 
                     <div class="zipcodes-container">
-                      <ul class="searched-zipcodes-list">
+                      <ul class="searched-zipcodes-list flex flex-col items-center mt-2">
                 
                       </ul>
                     </div>
                     <!-- displays cinemasNearby -->
-                    <div class="second-screen nearby-theaters-wrapper d-none">
+                    <div class="second-screen nearby-theaters-wrapper d-none overflow-auto">
                         <h3 class="nearby-theaters-heading text-2xl font-montserrat">Nearby Theaters</h3>
-                        <table class="nearby-theaters-table md:container md:mx-auto sm:container sm:mx-auto">
+                        <table class="nearby-theaters-table md:container md:mx-auto sm:container sm:mx-auto table-fixed">
                           <thead class="nearby-theaters-thead">
                             <tr class="nearby-theaters-tr">
                               <th class="nearby-theaters-th text-lg">Serial</th>
@@ -59,10 +59,10 @@
                         </table>
                       </div>
                       <!-- displays cinemaShowtimes -->
-                      <div class="third-screen shows-wrapper d-none">
+                      <div class="third-screen shows-wrapper d-none overflow-auto">
                         <div class="shows-wrapper-inner">
                           <h3 class="shows-heading text-2xl font-montserrat">Showtimes</h3>
-                          <table class="shows-table md:container md:mx-auto sm:container sm:mx-auto">
+                          <table class="shows-table md:container md:mx-auto sm:container sm:mx-auto table-fixed">
                             <thead class="shows-thead">
                               <tr class="shows-tr">
                                 <th class="shows-th text-lg">Serial</th>
@@ -78,7 +78,7 @@
                         </div>
                       </div>
                       <!-- displays the Google Map -->
-                      <div class="forth-screen theater-map-wrapper d-none">
+                      <div class="forth-screen theater-map-wrapper d-none overflow-auto">
                         <div class="theater-map-wrapper-inner">
                           <div class="theater-map max-w-md"></div>
                           <button class="h-14 rounded-lg font-montserrat w-1/2  text-xl go-back-btn">Go Back</button>
