@@ -85,6 +85,7 @@ function showTheaterMap(e) {
   const theaterLng = Number(e.target.querySelector('.theater-lng-inp').value);
 
   firstScreenDiv.classList.add('d-none');
+  zipCodesDiv.classList.add('d-none');
   secondScreenDiv.classList.add('d-none');
   forthScreenDiv.classList.remove('d-none');
 
@@ -106,6 +107,7 @@ async function renderTheaterShows(e) {
   const theaterId = e.target.querySelector('.theater-id-inp').value;
   const date = e.target.querySelector('.theater-shows-date-inp').value;
   firstScreenDiv.classList.add('d-none');
+  zipCodesDiv.classList.add('d-none');
   secondScreenDiv.classList.add('d-none');
   thirdScreenDiv.classList.remove('d-none');
   showsTbody.innerHTML = '';
@@ -177,7 +179,6 @@ function grabLocationHandler(e) {
   e.preventDefault();
 
   secondScreenDiv.classList.remove('d-none');
-  zipCodesDiv.classList.add('d-none');
 
   var zipCode = document.querySelector('.zip-code-inp').value;
   saveSearchedZipCode(zipCode);
@@ -200,6 +201,7 @@ function goBackHandler() {
   forthScreenDiv.classList.add('d-none');
   secondScreenDiv.classList.remove('d-none');
   firstScreenDiv.classList.remove('d-none');
+  zipCodesDiv.classList.remove('d-none');
 }
 
 // submit eventListener for the .grab-location-form
@@ -213,7 +215,6 @@ goBackBtns.forEach(function(goBackBtn){
 // convert the value of the element clicked into coords
 function getLocationHandler (e) {
   secondScreenDiv.classList.remove('d-none');
-  zipCodesDiv.classList.add('d-none');
 
   var zipCode = e.target.dataset.q;
   var geocodeApiKey = 'AIzaSyAEbZW4uFqVbf4qom4lu0Hgj6BZ71Cm1dE';
