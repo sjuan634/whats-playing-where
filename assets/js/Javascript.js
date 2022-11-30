@@ -1,9 +1,9 @@
 // MovieGlu API credentials
-const API_KEY = 'UkhUTl9YWDpPWDVQeDNKS0NVY1Q=';
-const CLIENT_NAME = 'RHTN';
-const X_API_KEY = 'Fvn2jSwMsT4NBd1JVtz9u9lnwhsnaZQs2wP8Nmq8';
+const API_KEY = 'UkVBTF8yOjhJQklqY2JzcEl5cA==';
+const CLIENT_NAME = 'REAL_2';
+const X_API_KEY = 'HFqZP0UNPfN3uKGQ9S6q3rSHCcikota63EjcIFD0';
 const API_VERSION = 'v200';
-const TERRITORY = 'XX';
+const TERRITORY = 'US';
 
 const firstScreenDiv = document.querySelector('.first-screen');
 const grabLocationForm = document.querySelector('.grab-location-form');
@@ -31,8 +31,7 @@ function getNearbyTheaters() {
         "x-api-key": X_API_KEY,
         "device-datetime": new Date().toISOString(),
         "territory": TERRITORY,
-        // "geolocation": `${curLocation.lat};${curLocation.lng}`
-        "geolocation": '-22.0;14.0'
+        "geolocation": `${curLocation.lat};${curLocation.lng}`
       }
     })
     .then(function(res){
@@ -61,8 +60,7 @@ function getTheaterShowTimes(theaterId, date) {
         "x-api-key": X_API_KEY,
         "device-datetime": new Date().toISOString(),
         "territory": TERRITORY,
-        // "geolocation": `${curLocation.lat};${curLocation.lng}`
-        "geolocation": '-22.0;14.0'
+        "geolocation": `${curLocation.lat};${curLocation.lng}`
       }
     })
     .then(function(res){
